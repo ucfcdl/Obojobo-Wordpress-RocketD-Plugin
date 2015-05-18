@@ -1,0 +1,13 @@
+{
+    "name": "obojobo/rocketD",
+    "type": "wordpress-plugin",
+    "require": {
+        "composer/installers": "~1.0"
+    },
+    "authors": [
+        {
+            "name": "Ian Turgeon",
+            "email": "iturgeon@gmail.com"
+        }
+    ]
+}
