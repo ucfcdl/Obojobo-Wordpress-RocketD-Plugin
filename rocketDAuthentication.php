@@ -15,9 +15,14 @@ Version: 1
 // If they are - give them the proper role, create a wordpress user, and log em in to both systems
 
 
-add_filter('authenticate', 'rocketD_auth_check_password', 1, 3);
+add_filter('authenticate', 'rocketD_auth_check_password', 20, 3);
 function rocketD_auth_check_password($user, $username, $password)
 {
+	if($user instanceof WP_User)
+	{
+		return $user;
+	}
+
 	require_once(dirname(__FILE__)."/../../../../internal/app.php");
 	$API = \obo\API::getInstance();
 	
@@ -46,7 +51,9 @@ function rocketD_auth_check_password($user, $username, $password)
 	// crudentials sent - lets look to see if the authenticate in the app
 	else
 	{
-		$result = $API->doLogin($username, $password);
+		$UM = \rocketD\auth\AuthManager::getInstance();
+ 		$result = $UM->login($username, $password);
+
 		if($result === true)
 		{
 			$user = $API->getUser();
