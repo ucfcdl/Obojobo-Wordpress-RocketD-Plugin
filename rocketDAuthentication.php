@@ -165,6 +165,8 @@ function rocketD_admin_tool_head()
 	wp_enqueue_style( 'datepicker', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/themes/base/jquery-ui.css');
 }
 
+// prevent /admin from redirecting to /wp/wp-admin
+remove_action( 'template_redirect', 'wp_redirect_admin_locations', 1000 );
 
 add_action( 'admin_init', 'establish_header' );
 
